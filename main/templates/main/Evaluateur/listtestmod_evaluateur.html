@@ -1,0 +1,49 @@
+{% extends 'main/Evaluateur/base_evaluateur.html' %}
+
+{% block content %}
+
+
+<div class="container-fluid">
+    <a href="{% url 'add_test' module.id %}" style="float:right"><Button class="btn btn-primary">Ajouter un
+            nouveau
+            test</Button></a>
+    <div class="row">
+        {% for test in test_list %}
+
+        <div class="col-xl-3 col-md-6 mb-4">
+            <div class="card border-left-primary shadow h-100 ">
+                <!-- Card Header - Dropdown -->
+                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                    <h6 class="m-0 font-weight-bold text-primary">
+                        <div class="m-0 font-weight-bold text-primary">
+                            {{test.nom}}</div>
+                    </h6>
+
+                    <a href="{% url  'home_test' module.id test.id %}"><button class="btn btn-primary btn-sm">Accéder</button></a>
+                </div>
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <a href="#">
+
+                            </a>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">Date Debut :<br>{{test.DateDeb}}</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">Date Fin :<br> {{test.DateFin}}</div>
+
+
+                        </div>
+                        <div class="col-auto">
+                            <i class="fas fa-file		fa-2x text-gray-300"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        {% endfor %}
+    </div>
+</div>
+
+
+{% endblock %}

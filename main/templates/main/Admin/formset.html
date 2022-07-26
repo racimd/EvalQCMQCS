@@ -1,0 +1,23 @@
+{% extends 'main/Evaluateur/base_evaluateur.html' %}
+
+{% load static %}
+{% block content %}
+<a href="javascript:history.back()"><button style="float:right">Go back</button></a>
+<form method="POST">
+    {% csrf_token %}
+    <div class="test">
+        {{form}}
+    </div>
+    <hr>
+
+
+
+    <div class="container-fluid">
+        {{formset.as_p}}
+
+        <button type="submit">Save</button>
+    </div>
+
+</form>
+<script src=" {% static 'main/js/changementnom.js' %} "> </script>
+{% endblock %}

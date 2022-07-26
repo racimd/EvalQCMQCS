@@ -1,0 +1,43 @@
+{% extends 'main/Candidat/base_candidat.html' %}
+
+
+{% load static %}
+
+
+
+{% block content %}
+
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<div class="container-fluid">
+    <input type="hidden" id="datefin" name="variable" value="{{ datefin }}">
+
+    <div class="col-md-3">
+        <div class="card bg-dark text-white">
+            <h3 class="card-title text-center">
+                <div class="d-flex flex-wrap justify-content-center mt-2">
+                    <a><span class="badge hours">
+                            <div id="timer" class=""> </div>
+                        </span></a> 
+               
+                </div>
+            </h3>
+        </div>
+    </div>
+
+
+
+    <form id="quiz-form" class="mt-3 mb-3">
+        {% csrf_token %}
+        <div id="quiz-box">
+
+
+        </div>
+        <button type="submit" class="btn btn-primary" id="submit_btn">Soumettre</button>
+    </form>
+</div>
+{% block scripts %}
+<script src="{% static 'quizes/quiz.js' %}" defer></script>
+{% endblock scripts %}
+
+
+{% endblock %}

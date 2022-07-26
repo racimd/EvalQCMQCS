@@ -1,0 +1,26 @@
+{% extends 'main/Evaluateur/base_evaluateur.html' %}
+
+
+{% block content %}
+<div class="container-fluid">
+    <form method="POST" action="#">
+        {% csrf_token %}
+        <textarea rows="5" cols="50" name="valeur" class="form-control col-sm-5"
+            placeholder="La question doit être à la premiere ligne &#10; +1 Réponse.... (Veut dire que c'est une réponse juste qui vaut 1 point) &#10; -2 Réponse... (Veut dire que c'est une réponse fausse qui déduis 2 points)"></textarea>
+        <div class="  form-inline">
+            <input type="text" class="form-control" id="inputPassword2" placeholder="Tags" name="tag" style="margin-right: 2vh;">
+            <label for="type">Type: </label>
+
+            <select name="type" id="type">
+                <option value="QCM">QCM</option>
+                <option value="QCS">QCS</option>
+                
+            </select>
+        </div>
+        <input type="submit" value="submit" id="submit" name="submit" class="btn btn-primary" style="margin-top: 1vh;">
+    </form>
+    {{message}}
+</div>
+
+
+{% endblock %}

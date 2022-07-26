@@ -1,0 +1,15 @@
+{% extends 'main/Evaluateur/base_evaluateur.html' %}
+
+{% block content %}
+
+<p>Are you sure you want to invite ?</p>
+
+<form method="POST" action="{% url 'inviter_test' module.id test.id %} ">
+    {% csrf_token %}
+    <a href="{% url 'listtestmod' module.id %}">Cancel</a>
+
+
+    <input type="submit" name="Confirm">
+</form>
+
+{% endblock %}

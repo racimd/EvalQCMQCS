@@ -1,0 +1,113 @@
+{% extends 'main/Evaluateur/base_evaluateur.html' %}
+
+{% block content %}
+
+<style>
+    h4 {
+        color: black
+    }
+</style>
+
+<head>
+    <script src="https://code.jquery.com/jquery-3.6.0.js"
+        integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+    <!-- jsPDF library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.4.1/jspdf.min.js
+
+    "></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js
+
+    "></script>
+
+</head>
+
+
+<div class="container-fluid" id="content">
+    <div id="quiz-box">
+        <h4 style="display: inline-block;">Quiz {{test}} </h4>
+        <span style="display : inline; margin-left: 5vh; color:black">Candidat : {{resultat.candidat}}</span>
+
+        <button class="btn btn-primary" style="float:right" id="topdf">Export to PDF</button>
+
+    </div>
+
+</div>
+
+<script>
+
+
+    const quizBox = document.getElementById("quiz-box")
+    tab = {{ questions | safe }}
+    tab.forEach(e =>
+        Object.keys(e).forEach(function (key) {
+            k = key
+            quizBox.innerHTML += `
+                    <hr>
+                    <div class="mb-2">
+                        <b>${key}</b>
+                    </div>   
+                    `
+            e[key].forEach(key => {
+                quizBox.innerHTML += `
+                        <div>
+                            <input type="checkbox" class="ans" id="${k},${key}" name="${key}" value="${key}" disabled="disabled">
+                            
+                            <label for="${k},${key}">${key}</label>
+                        </div>
+                        `
+
+            })
+        }
+        )
+    );
+
+
+    data = {{ resultat.copie | safe }}
+    Object.keys(data).forEach(function (key) {
+
+        q = key.slice(0, -2);
+        data[key].forEach(key => {
+
+            if (document.getElementById(`${q},${key}`) != null) {
+                let x = document.getElementById(`${q},${key}`)
+                x.checked = true
+            }
+
+
+
+
+        })
+    });
+    document.getElementById("topdf").addEventListener('click', () => {
+        var img = new Image();
+
+        var pdf = new jsPDF('p', 'mm', 'a4');
+        // source can be HTML-formatted string, or a reference
+        // to an actual DOM element from which the text will be scraped.
+        source = document.getElementById("quiz-box")
+        html2canvas(document.querySelector("#content")).then(canvas => {
+            img = canvas.toDataURL("image/png");
+            var width = pdf.internal.pageSize.getWidth();
+
+            var height = pdf.internal.pageSize.getHeight();
+            console.log(width)
+            pdf.addImage(img, 'PNG', 1, 1, height, width);
+            pdf.save('test.pdf')
+
+        });
+
+
+        // we support special element handlers. Register them with jQuery-style 
+        // ID selector for either ID or node name. ("#iAmID", "div", "div" etc.)
+        // There is no support for any other type of selectors
+        // (class, of compound) at this time.
+
+
+    }
+    )
+
+
+
+</script>
+{% endblock %}

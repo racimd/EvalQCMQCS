@@ -1,0 +1,78 @@
+{% extends 'main/Evaluateur/base_evaluateur.html' %}
+
+{% block content %}
+<style>
+    dt {
+        font-size: larger;
+    }
+
+    dd {
+        color: black;
+        font-size: medium;
+    }
+
+    .btn01 {
+        margin: 0.5vh;
+
+    }
+
+    .column {
+        align-self: flex-start;
+    }
+</style>
+<div class="container-fluid">
+    <div class="col-xl-4 col-md-6 mb-8">
+        <div class="card border-left-primary shadow h-100 py-2">
+            <div class="card-body">
+                <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                        <div class="text-xs font-weight-bold text-primary text-uppercase mb-1 ">
+                            <h4>{{test.nom}}</h4>
+                        </div>
+                        <dl>
+                            <dt class="text-dark">Date de début</dt>
+                            <dd class="text-dark ">{{test.DateDeb}}</dd>
+                            <dt class="text-dark">Date de fin</dt>
+                            <dd class="text-dark">{{test.DateFin}}</dd>
+                            <dt class="text-dark">Questionnaire associé</dt>
+                            <dd class="text-dark">{{test.questionnaire}}</dd>
+                            <dt class="text-dark">Status</dt>
+                            {% if test.get_invitationcount == 0 %}
+                            <dd class="text-warning">Invitations non envoyés</dd>
+                            {% else %}
+                            <dd class="text-success">Invitations envoyés</dd>
+                            {% endif %}
+
+                        </dl>
+                    </div>
+                    <div class="column ">
+                        <a class="btn btn-info btn01" href="{% url 'update_test' module.id test.id %}">Update</a>
+                        <br>
+
+
+                        <a class="btn btn-danger btn01" href="{% url 'delete_test' module.id  test.id %} ">Delete</a>
+                        <br>
+                        {% if test.get_invitationcount == 0 %}
+                         <a class="btn btn-warning btn01" href="{% url 'inviter_test' module.id  test.id %} ">Inviter</a>
+                       
+                        {% else %}
+                         <a class="btn btn-dark btn01" href="{% url 'delete_invitation' module.id  test.id %} ">Annuler</a>
+                        
+                        {% endif %}
+                        {% if test.get_invitationcount == 0 %}
+                        
+                        {% else %}
+                        <br>
+                        <a class="btn btn-success btn01"
+                            href="{% url 'resultat_test_evaluateur' module.id  test.id %} ">Resultats</a>
+                        {% endif %}
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

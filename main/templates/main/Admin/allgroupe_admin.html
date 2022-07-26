@@ -1,0 +1,25 @@
+{% extends 'main/Admin/base_admin.html' %}
+
+{% block content %}
+
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Groupe</th>
+            <th scope="col">Etablissement</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for groupe in groupe_list %}
+        <tr>
+            <td>{{groupe.id}}</td>
+            <td>{{groupe.nom}}</td>
+            <td>{{groupe.etablissement}}</td>
+            <td><a href="{% url 'home_groupe' groupe.id %}">Acceder</a></td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+{% endblock %}

@@ -1,0 +1,37 @@
+{% extends 'main/Admin/base_admin.html' %}
+
+{% block content %}
+
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Username</th>
+            <th scope="col">Nom</th>
+            <th scope="col">Prenom</th>
+            <th scope="col">Update</th>
+            <th scope="col">Delete</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for evaluateur in evaluateur_list %}
+        <tr>
+            <td> {{evaluateur.user.id}} </td>
+            <td> {{evaluateur.user.username}} </td>
+            <td> {{evaluateur.user.last_name}} </td>
+            <td> {{evaluateur.user.first_name}} </td>
+
+            <td> <a class="btn btn-info" href="{% url 'update_evaluateur' evaluateur.id %}">Update</a></td>
+            <td> <a class="btn btn-danger" href="{% url 'delete_evaluateur' evaluateur.id %}">Delete</a></td>
+        </tr>
+
+        {% endfor %}
+    </tbody>
+
+
+
+
+</table>
+
+
+{% endblock %}

@@ -1,0 +1,15 @@
+{% extends 'main/SuperAdmin/base_superadmin.html' %}
+
+{% block content %}
+
+<p>Etes vous sûr de vouloir supprimer "{{item}}", ceci va supprimer tout les utilisateurs associés à cet etablissement ?</p>
+
+<form method="POST" action="{% url 'delete_etablissement' item.id %}">
+    {% csrf_token %}
+    <a href="{% url 'list_etablissement' %}">Cancel</a>
+
+
+    <input type="submit" name="Confirm">
+</form>
+
+{% endblock %}

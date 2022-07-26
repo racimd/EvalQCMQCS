@@ -1,0 +1,123 @@
+{% extends 'main/Admin/base_admin.html' %}
+{% load static %}
+
+{% block content %}
+<style>
+
+</style>
+
+<script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
+    crossorigin="anonymous"></script>
+
+
+<script src="{% static 'vendor/datatables/jquery.dataTables.min.js' %}"></script>
+
+
+<link href="{% static 'vendor/datatables/dataTables.bootstrap4.min.css' %}" rel="stylesheet">
+
+
+<div class="container-fluid">
+    <div class="card shadow mb-4">
+        <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-primary">Liste des Candidats</h6>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered " id="dataTable" width="100%" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th>Username</th>
+                            <th>Nom</th>
+                            <th>Prenom</th>
+                            <th>Email</th>
+                            <th>Update</th>
+                            <th>Delete</th>
+
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for candidat in candidat_list %}
+                        <tr>
+                            <td>{{candidat.user.username}}</td>
+                            <td>{{candidat.user.last_name}}</td>
+                            <td>{{candidat.user.first_name}}</td>
+                            <td>{{candidat.user.email}}</td>
+                            <td> <a class="btn btn-info" href="{% url 'update_candidat' candidat.id %}">Update</a>
+                            </td>
+                            <td> <a class="btn btn-danger" href="{% url 'delete_candidat' candidat.id %}">Delete</a>
+                            </td>
+
+
+
+
+                        </tr>
+                        {% endfor %}
+
+                    </tbody>
+                 
+
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Page level plugins -->
+<script src="{% static 'vendor/datatables/dataTables.bootstrap4.min.js' %}"></script>
+<!--    -->
+<style>
+    .dataTables_length {
+        display: inline;
+        margin-right: 2vh;
+    }
+
+    .dataTables_filter {
+        float: right;
+
+
+    }
+</style>
+<link rel="stylesheet" type="text/css"
+    href="https://cdn.datatables.net/v/bs4/jszip-2.5.0/dt-1.12.1/b-2.2.3/b-colvis-2.2.3/b-html5-2.2.3/datatables.min.css" />
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/pdfmake.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/vfs_fonts.js"></script>
+<script type="text/javascript"
+    src="https://cdn.datatables.net/v/bs4/jszip-2.5.0/dt-1.12.1/b-2.2.3/b-colvis-2.2.3/b-html5-2.2.3/datatables.min.js"></script>
+<!-- Page level custom scripts -->
+<script>
+    $(document).ready(function () {
+        $.noConflict();
+        var table = $('#dataTable').DataTable({
+            //Buttons
+
+            dom: 'lBfrtip',
+
+            buttons: [
+                {
+                    extend: 'pdf', text: '<i class="fas fa-file-pdf fa-1x ", aria-hidden="true"> Export to PDF</i>', exportOptions: {
+                        columns: [
+                            0, 1, 2, 3
+
+                        ]
+
+                    },
+
+
+                },
+
+
+
+            ]
+
+        }
+
+        );
+
+
+    });
+</script>
+
+
+{% endblock %}

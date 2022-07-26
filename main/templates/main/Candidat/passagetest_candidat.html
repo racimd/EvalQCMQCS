@@ -1,0 +1,14 @@
+Nom du test : {{test}}
+<br>
+
+Nom du questionnaire : {{questionnaire}}
+<br>
+Question du questionnaire :
+<hr>
+{% for question in list_question %}
+{{question}}
+{{question.get_reponses}}
+
+<br>
+{% endfor %}
+<br>

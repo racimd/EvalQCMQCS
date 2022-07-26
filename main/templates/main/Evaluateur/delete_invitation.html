@@ -1,0 +1,15 @@
+{% extends 'main/Evaluateur/base_evaluateur.html' %}
+
+{% block content %}
+
+<p>Etes vous sûr de vouloir supprimer les invitations de {{test}} ?</p>
+
+<form method="POST" action="{% url 'delete_invitation' module.id test.id %}">
+    {% csrf_token %}
+    <a href="{% url 'listtestmod' module.id %}"><button class="btn btn-primary">Cancel</button></a>
+
+
+    <input type="submit" name="Confirm" class="btn btn-primary" value="Submit">
+</form>
+
+{% endblock %}

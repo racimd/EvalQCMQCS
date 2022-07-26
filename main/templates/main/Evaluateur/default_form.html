@@ -1,0 +1,16 @@
+{% extends 'main/Evaluateur/base_evaluateur.html' %}
+
+{% block content %}
+
+<script type="text/javascript" src="../my_admin/jsi18n/"></script>
+<script type="text/javascript" src="../media/admin/js/core.js"></script>
+
+<div class="container-fluid">
+<form action="" method="POST">
+    {% csrf_token %}
+    {{form.as_p}}
+    <input type="submit" name="Submit" class="btn btn-primary">
+
+</form>
+</div>
+{% endblock %}

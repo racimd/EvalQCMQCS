@@ -1,0 +1,46 @@
+{% extends 'main/Admin/base_admin.html' %}
+
+{% block content %}
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-primary">List des Modules</h6>
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Nom</th>
+                        <th>Evaluateur</th>
+                        <th>Groupe</th>
+
+                    </tr>
+                </thead>
+                <tfoot>
+                    <tr>
+                        <th>ID</th>
+                        <th>Nom</th>
+                        <th>Evaluateur</th>
+                        <th>Groupes</th>
+
+                    </tr>
+                </tfoot>
+                <tbody>
+                    {% for module in module_list %}
+                    <tr>
+                        <td>{{module.id}}</td>
+                        <td>{{module.nom}}</td>
+                        <td>{{module.evaluateur}}</td>
+
+                        <td>{% for groupe in module.groupes.all %} {{groupe}} {% endfor %}</td>
+
+                    </tr>
+                    {% endfor %}
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}
